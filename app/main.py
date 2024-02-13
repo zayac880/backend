@@ -39,3 +39,8 @@ def update_shift_task(task_id: int, shift_task_update: schemas.ShiftTaskUpdate, 
     if updated_task is None:
         raise HTTPException(status_code=404, detail="Shift task not found")
     return updated_task
+
+
+@app.get("/shift-tasks-filter/")
+def filter_get_shift_tasks(filters: schemas.ShiftTaskFilter = Depends(), db: Session = Depends(get_db)):
+    return crud.filter_shift_tasks(db, filters)
