@@ -45,3 +45,18 @@ def update_shift_task(db: Session, task_id: int, shift_task_update: schemas.Shif
     db.commit()
     db.refresh(shift_task)
     return shift_task
+
+
+def filter_shift_tasks(db: Session, filters: schemas.ShiftTaskFilter):
+    query = db.query(models.ShiftTaskDB)
+
+    if filters.status is not None:
+        query = query.filter(models.ShiftTaskDB.status == filters.status)
+    if filters.batch_number is not None:
+        query = query.filter(models.ShiftTaskDB.batch_number == filters.batch_number)
+    if filters.batch_date is not None:
+        query = query.filter(models.ShiftTaskDB.batch_date == filters.batch_date)
+
+    query = query.offset(filters.offset).limit(filters.limit)
+
+    return query.all()

@@ -33,6 +33,14 @@ class ShiftTaskUpdate(BaseModel):
     rc_identifier: Optional[str] = None
 
 
+class ShiftTaskFilter(BaseModel):
+    status: Optional[bool] = None
+    batch_number: Optional[int] = None
+    batch_date: Optional[str] = None
+    limit: Optional[int] = 10
+    offset: Optional[int] = 0
+
+
 class ProductInput(BaseModel):
     unique_product_code: str
     batch_number: int
