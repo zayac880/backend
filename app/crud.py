@@ -20,3 +20,8 @@ def create_shift_task(shift_task: schemas.ShiftTaskCreate, db: Session):
         db.commit()
         db.refresh(db_shift_task)
         return db_shift_task
+
+
+def get_shift_task_by_id(db: Session, task_id: int):
+    return db.query(models.ShiftTaskDB).filter(models.ShiftTaskDB.id == task_id).first()
+
