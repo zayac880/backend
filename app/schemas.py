@@ -16,7 +16,6 @@ class ShiftTaskCreate(BaseModel):
     rc_identifier: str = Field(..., alias="ИдентификаторРЦ")
     start_time: datetime = Field(..., alias="ДатаВремяНачалаСмены")
     end_time: datetime = Field(..., alias="ДатаВремяОкончанияСмены")
-    closed_at: Optional[datetime] = None
     id: Optional[int] = None
 
 
@@ -44,8 +43,13 @@ class ShiftTaskFilter(BaseModel):
 class ProductInput(BaseModel):
     unique_product_code: str
     batch_number: int
-    batch_date: str
+    batch_date: date
 
 
 class ProductListInput(BaseModel):
     products: List[ProductInput]
+
+
+class AggregationInput(BaseModel):
+    shift_tasks_id: int
+    unique_product_code: str
