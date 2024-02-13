@@ -20,6 +20,19 @@ class ShiftTaskCreate(BaseModel):
     id: Optional[int] = None
 
 
+class ShiftTaskUpdate(BaseModel):
+    status: Optional[bool] = None
+    task_description: Optional[str] = None
+    workshop: Optional[str] = None
+    shift: Optional[str] = None
+    brigade: Optional[str] = None
+    batch_number: Optional[int] = None
+    batch_date: Optional[datetime] = None
+    product: Optional[str] = None
+    ecn_code: Optional[str] = None
+    rc_identifier: Optional[str] = None
+
+
 class ProductInput(BaseModel):
     unique_product_code: str
     batch_number: int

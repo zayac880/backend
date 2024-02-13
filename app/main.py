@@ -32,3 +32,10 @@ def get_shift_task(task_id: int = Path(..., title="The ID of the shift task to r
 
     return shift_task
 
+
+@app.put("/shift-tasks/{task_id}")
+def update_shift_task(task_id: int, shift_task_update: schemas.ShiftTaskUpdate, db: Session = Depends(get_db)):
+    updated_task = crud.update_shift_task(db, task_id, shift_task_update)
+    if updated_task is None:
+        raise HTTPException(status_code=404, detail="Shift task not found")
+    return updated_task
